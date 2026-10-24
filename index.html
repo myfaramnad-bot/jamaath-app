@@ -1,1 +1,81 @@
-
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0f5132">
+<title>Jamaath App | ஜமாஅத் நிர்வாகம்</title>
+<style>
+:root{--green:#0f5132;--green2:#157347;--gold:#d9b45b;--bg:#f4f7f5;--ink:#1f2933;--muted:#64748b;--line:#dce5df;--white:#fff}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Noto Sans Tamil",Arial,sans-serif}
+header{background:linear-gradient(135deg,#0b3d27,#157347);color:#fff;padding:24px 18px 20px;border-bottom:4px solid var(--gold)}
+.wrap{max-width:1050px;margin:auto}header .top{display:flex;gap:14px;align-items:center}.mark{width:54px;height:54px;border:1px solid #ffffff80;border-radius:50%;display:grid;place-items:center;font-size:27px;background:#ffffff12}
+h1{font-size:clamp(22px,4vw,32px);margin:0}header p{margin:5px 0 0;color:#e4f1e9;font-size:14px}
+nav{display:flex;gap:8px;overflow-x:auto;padding:12px 14px;background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:2}
+nav button{white-space:nowrap;border:1px solid var(--line);background:#fff;border-radius:999px;padding:9px 14px;font:inherit;color:var(--green);cursor:pointer}
+nav button.active,button.primary{background:var(--green);color:#fff;border-color:var(--green)}
+main{max-width:1050px;margin:22px auto;padding:0 14px 40px}.welcome{background:#fff;border:1px solid var(--line);border-radius:18px;padding:20px;margin-bottom:16px}
+.welcome h2{margin:0 0 6px;color:var(--green)}.muted{color:var(--muted);font-size:14px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:14px 0}.stat{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px}.stat b{display:block;font-size:24px;color:var(--green)}.stat span{font-size:13px;color:var(--muted)}
+.panel{display:none;background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px;margin-bottom:14px}.panel.active{display:block}.panel h2{margin:0 0 14px;color:var(--green)}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.field{display:flex;flex-direction:column;gap:6px}.field.full{grid-column:1/-1}label{font-size:14px;font-weight:650}input,textarea,select{width:100%;border:1px solid #cbd5d0;border-radius:9px;padding:11px;font:inherit;background:#fff}textarea{min-height:90px;resize:vertical}
+button{font:inherit;cursor:pointer}.primary,.secondary,.danger{border-radius:9px;padding:10px 14px;border:1px solid var(--line)}.secondary{background:#fff;color:var(--green)}.danger{background:#fff0f0;color:#a61b1b;border-color:#f0c7c7}.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.list{display:grid;gap:10px;margin-top:14px}.item{border:1px solid var(--line);border-radius:12px;padding:14px}.item h3{margin:0 0 5px;font-size:17px}.item p{margin:5px 0;white-space:pre-wrap}.item .meta{color:var(--muted);font-size:13px}.empty{padding:18px;text-align:center;color:var(--muted);border:1px dashed var(--line);border-radius:12px}
+.notice{background:#fff8e6;border:1px solid #f0dfad;padding:12px 14px;border-radius:12px;font-size:14px;margin:12px 0}.prayers{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}.prayer{background:#f4f8f5;border-radius:10px;padding:12px;text-align:center}.prayer b{display:block;color:var(--green)}.prayer input{padding:7px;margin-top:7px}
+footer{text-align:center;color:var(--muted);padding:22px;font-size:13px}
+@media(max-width:650px){.stats{grid-template-columns:repeat(3,1fr);gap:7px}.stat{padding:11px}.stat b{font-size:19px}.grid{grid-template-columns:1fr}.field.full{grid-column:auto}.prayers{grid-template-columns:repeat(2,1fr)}main{margin-top:14px}.panel{padding:14px}}
+</style>
+</head>
+<body>
+<header><div class="wrap top"><div class="mark">☪</div><div><h1>ஜமாஅத் நிர்வாகம்</h1><p>Jamaath App · தகவல்கள், நிகழ்ச்சிகள் மற்றும் சேவைகள்</p></div></div></header>
+<nav id="nav">
+<button class="active" data-tab="home">முகப்பு</button><button data-tab="prayer">தொழுகை நேரம்</button><button data-tab="announcements">அறிவிப்புகள்</button><button data-tab="members">உறுப்பினர்கள்</button><button data-tab="events">நிகழ்ச்சிகள்</button><button data-tab="donations">நன்கொடை</button><button data-tab="admin">நிர்வாகம்</button>
+</nav>
+<main>
+<section id="home" class="panel active">
+<div class="welcome"><h2>அஸ்ஸலாமு அலைக்கும்</h2><p>உங்கள் ஜமாஅத்தின் தகவல்களை ஒரே இடத்தில் நிர்வகிக்கவும்.</p><p class="muted">இந்த ஆரம்ப பதிப்பில் தகவல்கள் இந்த browser-ல் மட்டுமே சேமிக்கப்படும்.</p></div>
+<div class="stats"><div class="stat"><b id="countMembers">0</b><span>உறுப்பினர்கள்</span></div><div class="stat"><b id="countEvents">0</b><span>நிகழ்ச்சிகள்</span></div><div class="stat"><b id="countDonations">0</b><span>நன்கொடை பதிவுகள்</span></div></div>
+<h2>சமீபத்திய அறிவிப்புகள்</h2><div id="homeAnnouncements" class="list"></div>
+<div class="notice"><b>முக்கியம்:</b> இது ஒரு ஆரம்ப demo. உண்மையான உறுப்பினர்/நன்கொடை விவரங்கள், பாதுகாப்பான நிர்வாகி உள்நுழைவு மற்றும் பலருக்கும் பகிரப்படும் தரவுகளுக்கு database + secure backend தேவை.</div>
+</section>
+<section id="prayer" class="panel"><h2>தொழுகை நேரங்கள்</h2><p class="muted">உங்கள் உள்ளூர் ஜமாஅத் அறிவித்த நேரங்களை நிரப்பவும்.</p><div class="prayers" id="prayerTimes"></div><div class="actions"><button class="primary" id="savePrayer">நேரங்களைச் சேமிக்கவும்</button><button class="secondary" id="resetPrayer">மீட்டமை</button></div><p class="muted" id="prayerStatus"></p></section>
+<section id="announcements" class="panel"><h2>அறிவிப்புகள்</h2><form id="announcementForm" class="grid"><div class="field full"><label for="aTitle">தலைப்பு</label><input id="aTitle" required maxlength="100" placeholder="எ.கா. பொதுக்கூட்ட அறிவிப்பு"></div><div class="field full"><label for="aBody">விவரம்</label><textarea id="aBody" required maxlength="2000" placeholder="அறிவிப்பு விவரங்களை எழுதவும்"></textarea></div><div class="field"><label for="aDate">தேதி</label><input id="aDate" type="date"></div><div class="field"><label for="aBy">வெளியிடுபவர்</label><input id="aBy" placeholder="ஜமாஅத் நிர்வாகம்"></div><div class="field full"><button class="primary">அறிவிப்பைச் சேர்க்கவும்</button></div></form><div id="announcementsList" class="list"></div></section>
+<section id="members" class="panel"><h2>உறுப்பினர் பதிவுகள்</h2><div class="notice">சோதனைக்காக மட்டுமே பெயர்/தொடர்பு விவரங்களை உள்ளிடவும். இந்த demo பாதுகாப்பான உறுப்பினர் தரவுத்தளம் அல்ல.</div><form id="memberForm" class="grid"><div class="field"><label for="mName">பெயர்</label><input id="mName" required maxlength="100"></div><div class="field"><label for="mPhone">தொலைபேசி</label><input id="mPhone" type="tel" maxlength="30"></div><div class="field"><label for="mArea">பகுதி</label><input id="mArea" maxlength="100"></div><div class="field"><label for="mType">உறுப்பினர் வகை</label><select id="mType"><option>உறுப்பினர்</option><option>நிர்வாகி</option><option>தன்னார்வலர்</option></select></div><div class="field full"><button class="primary">உறுப்பினரைச் சேர்க்கவும்</button></div></form><div id="membersList" class="list"></div></section>
+<section id="events" class="panel"><h2>நிகழ்ச்சிகள் மற்றும் கூட்டங்கள்</h2><form id="eventForm" class="grid"><div class="field full"><label for="eTitle">நிகழ்ச்சி பெயர்</label><input id="eTitle" required maxlength="120"></div><div class="field"><label for="eDate">தேதி</label><input id="eDate" type="date" required></div><div class="field"><label for="eTime">நேரம்</label><input id="eTime" type="time"></div><div class="field full"><label for="ePlace">இடம்</label><input id="ePlace" maxlength="150"></div><div class="field full"><label for="eDetails">கூடுதல் விவரம்</label><textarea id="eDetails" maxlength="1500"></textarea></div><div class="field full"><button class="primary">நிகழ்ச்சியைச் சேர்க்கவும்</button></div></form><div id="eventsList" class="list"></div></section>
+<section id="donations" class="panel"><h2>நன்கொடை பதிவுகள்</h2><div class="notice">இது கணக்கு/பணம் பெறும் வசதி அல்ல; பதிவேடு demo மட்டுமே. உண்மையான நிதி விவரங்களுக்கு பாதுகாப்பான backend மற்றும் அணுகல் கட்டுப்பாடு அவசியம்.</div><form id="donationForm" class="grid"><div class="field"><label for="dName">நன்கொடையாளர் பெயர்</label><input id="dName" required maxlength="100"></div><div class="field"><label for="dAmount">தொகை (₹)</label><input id="dAmount" type="number" min="1" max="100000000" step="0.01" required></div><div class="field"><label for="dDate">தேதி</label><input id="dDate" type="date" required></div><div class="field"><label for="dPurpose">நோக்கம்</label><input id="dPurpose" maxlength="150" placeholder="எ.கா. பொதுநிதி"></div><div class="field full"><button class="primary">பதிவைச் சேர்க்கவும்</button></div></form><div id="donationsList" class="list"></div></section>
+<section id="admin" class="panel"><h2>நிர்வாகம் / Admin</h2><p>இந்த prototype-ல் உண்மையான login அமைப்பு இல்லை. கீழே உள்ள வசதிகள் இந்த browser-ல் உள்ள demo தரவுகளுக்கானவை மட்டுமே.</p><div class="actions"><button class="secondary" id="exportData">தரவுகளை JSON ஆகப் பதிவிறக்கவும்</button><button class="danger" id="clearData">இந்த browser-ல் உள்ள demo தரவை அழிக்கவும்</button></div><p id="adminStatus" class="muted"></p><div class="notice"><b>வெளியிடுவதற்கு முன்:</b> பொதுமக்கள் பார்க்கும் பக்கம் மற்றும் நிர்வாகி பக்கத்தைப் பிரிக்கவும்; server-side authentication, database, authorization, backups மற்றும் privacy notice அமைக்கவும். HTML-ல் password மட்டும் வைத்து பாதுகாப்பான login உருவாக்க முடியாது.</div></section>
+</main><footer>Jamaath App · ஆரம்ப பதிப்பு · உங்கள் ஜமாஅத்தின் பெயர் மற்றும் லோகோவை பின்னர் சேர்க்கலாம்.</footer>
+<script>
+const $=id=>document.getElementById(id);
+const KEY='jamaathAppDemo_v1';
+const defaults={prayers:{Fajr:'',Dhuhr:'',Asr:'',Maghrib:'',Isha:''},announcements:[],members:[],events:[],donations:[]};
+function load(){try{return {...structuredClone(defaults),...JSON.parse(localStorage.getItem(KEY)||'{}')}}catch{return structuredClone(defaults)}}
+let data=load();
+function save(){localStorage.setItem(KEY,JSON.stringify(data));render()}
+function esc(v=''){return String(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function empty(msg){return `<div class="empty">${msg}</div>`}
+function card(title,body,meta='',remove=''){return `<article class="item"><h3>${esc(title)}</h3>${body?`<p>${esc(body)}</p>`:''}${meta?`<div class="meta">${esc(meta)}</div>`:''}${remove}</article>`}
+function deleteButton(type,id){return `<div class="actions"><button class="danger" data-delete="${type}" data-id="${esc(id)}">நீக்கவும்</button></div>`}
+function render(){
+ $('countMembers').textContent=data.members.length;$('countEvents').textContent=data.events.length;$('countDonations').textContent=data.donations.length;
+ $('announcementsList').innerHTML=data.announcements.length?data.announcements.map(x=>card(x.title,x.body,[x.date,x.by].filter(Boolean).join(' · '),deleteButton('announcements',x.id))).join(''):empty('இன்னும் அறிவிப்புகள் இல்லை');
+ $('homeAnnouncements').innerHTML=data.announcements.slice().reverse().slice(0,3).map(x=>card(x.title,x.body,[x.date,x.by].filter(Boolean).join(' · '))).join('')||empty('அறிவிப்புகள் இங்கே தோன்றும்');
+ $('membersList').innerHTML=data.members.length?data.members.map(x=>card(x.name, [x.phone,x.area].filter(Boolean).join(' · '),x.type,deleteButton('members',x.id))).join(''):empty('உறுப்பினர் பதிவுகள் இல்லை');
+ $('eventsList').innerHTML=data.events.length?data.events.slice().sort((a,b)=>(a.date||'').localeCompare(b.date||'')).map(x=>card(x.title,[x.place,x.details].filter(Boolean).join(' — '),[x.date,x.time].filter(Boolean).join(' · '),deleteButton('events',x.id))).join(''):empty('நிகழ்ச்சிகள் எதுவும் இல்லை');
+ $('donationsList').innerHTML=data.donations.length?data.donations.slice().reverse().map(x=>card(x.name,`₹${Number(x.amount).toLocaleString('en-IN')} · ${x.purpose||'நோக்கம் குறிப்பிடப்படவில்லை'}`,x.date,deleteButton('donations',x.id))).join(''):empty('நன்கொடை பதிவுகள் இல்லை');
+ $('prayerTimes').innerHTML=Object.entries({Fajr:'ஃபஜ்ர்',Dhuhr:'லுஹர்',Asr:'அஸர்',Maghrib:'மஃரிப்',Isha:'இஷா'}).map(([k,label])=>`<div class="prayer"><b>${label}</b><input aria-label="${label} நேரம்" type="time" id="p_${k}" value="${esc(data.prayers[k]||'')}"></div>`).join('');
+}
+function add(form,arr,fields){$(form).addEventListener('submit',e=>{e.preventDefault();const item={id:crypto.randomUUID?crypto.randomUUID():String(Date.now())};fields.forEach(([key,id])=>item[key]=$(id).value.trim());data[arr].push(item);e.target.reset();save()})}
+add('announcementForm','announcements',[['title','aTitle'],['body','aBody'],['date','aDate'],['by','aBy']]);
+add('memberForm','members',[['name','mName'],['phone','mPhone'],['area','mArea'],['type','mType']]);
+add('eventForm','events',[['title','eTitle'],['date','eDate'],['time','eTime'],['place','ePlace'],['details','eDetails']]);
+add('donationForm','donations',[['name','dName'],['amount','dAmount'],['date','dDate'],['purpose','dPurpose']]);
+$('savePrayer').addEventListener('click',()=>{Object.keys(data.prayers).forEach(k=>data.prayers[k]=$('p_'+k).value);save();$('prayerStatus').textContent='தொழுகை நேரங்கள் இந்த browser-ல் சேமிக்கப்பட்டன.'});
+$('resetPrayer').addEventListener('click',()=>{data.prayers={Fajr:'',Dhuhr:'',Asr:'',Maghrib:'',Isha:''};save();$('prayerStatus').textContent='நேரங்கள் மீட்டமைக்கப்பட்டன.'});
+$('nav').addEventListener('click',e=>{const b=e.target.closest('button[data-tab]');if(!b)return;document.querySelectorAll('nav button').forEach(x=>x.classList.toggle('active',x===b));document.querySelectorAll('.panel').forEach(x=>x.classList.toggle('active',x.id===b.dataset.tab));window.scrollTo({top:0,behavior:'smooth'})});
+document.addEventListener('click',e=>{const b=e.target.closest('button[data-delete]');if(!b)return;const type=b.dataset.delete;if(confirm('இந்த பதிவை நீக்க வேண்டுமா?')){data[type]=data[type].filter(x=>x.id!==b.dataset.id);save()}});
+$('exportData').addEventListener('click',()=>{const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='jamaath-demo-data.json';a.click();URL.revokeObjectURL(a.href);$('adminStatus').textContent='JSON கோப்பு பதிவிறக்கம் தொடங்கியது.'});
+$('clearData').addEventListener('click',()=>{if(confirm('இந்த browser-ல் உள்ள அனைத்து demo பதிவுகளையும் நிரந்தரமாக அழிக்கவா?')){data=structuredClone(defaults);save();$('adminStatus').textContent='Demo தரவு அழிக்கப்பட்டது.'}});
+render();
+</script>
+</body></html>
